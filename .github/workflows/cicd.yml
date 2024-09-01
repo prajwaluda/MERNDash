@@ -18,7 +18,6 @@ jobs:
               with:
                     push: true
                     tags: prajwaludpdi0/dashreact:latest
-                    secrets: "REACT_APP_BASE_URL=${{secrets.REACT_APP_BASE_URL}}"
     
     deploy:
         needs: build
@@ -29,5 +28,5 @@ jobs:
         - name: Delete old container
           run: docker rm -f reactjs-app-container
         - name: Run Docker Container
-          run: docker run -d -p 3000:80 --name reactjs-app-container prajwaludpdi0/dashreact
+          run: docker run -d -p 3000:80 --name reactjs-app-container -e REACT_APP_BASE_URL="${{secrets.REACT_APP_BASE_URL}}" prajwaludpdi0/dashreact
 

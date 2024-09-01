@@ -16,17 +16,16 @@ jobs:
             - name: Build and push
               uses: docker/build-push-action@v6
               with:
-                    push: true
-                    tags: prajwaludpdi0/dashreact:latest
+                push: true
+                tags: prajwaludpdi0/dashreact:latest
     
     deploy:
         needs: build
         runs-on: self-hosted 
         steps:
         - name: Pull image from docker hub
-          run: docker pull prajwaludpdi0/dashreact:latest 
+          run: docker pull prajwaludpdi0/dashreact:latest
         - name: Delete old container
           run: docker rm -f reactjs-app-container
         - name: Run Docker Container
           run: docker run -d -p 3000:80 --name reactjs-app-container -e REACT_APP_BASE_URL="${{secrets.REACT_APP_BASE_URL}}" prajwaludpdi0/dashreact
-

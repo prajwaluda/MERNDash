@@ -1,13 +1,14 @@
 import {createApi,fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
+baselink=process.env.REACT_APP_BASE_URL
 export const api =createApi({
-    baseQuery:fetchBaseQuery({baseUrl:process.env.REACT_APP_BASE_URL}),
+    baseQuery:fetchBaseQuery({baseUrl:baselink}),
     reducerPath:"adminApi",
     tagTypes:["User", "Products", "Customers", "Transactions", "Geography", "Overview", "Admins", "Performance", "Dashboard"],
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        'Access-Control-Allow-Origin': `${process.env.REACT_APP_BASE_URL}`,
+        'Access-Control-Allow-Origin': `${baselink}`,
     },
     endpoints:(build)=>({
         getUser: build.query({
